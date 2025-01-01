@@ -25,7 +25,8 @@ public class MusclesImporter {
                 JSONObject muscleData = (JSONObject) obj;
                 // muscles 배열의 내용들을 하나씩 저장
                 
-                Integer number = (Integer) muscleData.get("number");
+                String numberInString = (String) muscleData.get("number");
+                int number = Integer.parseInt(numberInString);
                 String OldVersionKorean = (String) muscleData.get("OldVersionKorean");
                 String NewVersionKorean = (String) muscleData.get("NewVersionKorean");
                 String EnglishAnswer = (String) muscleData.get("EnglishAnswer");

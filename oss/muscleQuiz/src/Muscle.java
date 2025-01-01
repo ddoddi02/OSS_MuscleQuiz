@@ -2,7 +2,7 @@ public class Muscle {
     private String OldVersionKorean;
     private String NewVersionKorean;
     private String EnglishAnswer;
-    private String image = "images/";
+    private String image;
 
     public Muscle(String OldVersionKorean, String NewVersionKorean, String EnglishAnswer, String image) {
         this.OldVersionKorean = OldVersionKorean;

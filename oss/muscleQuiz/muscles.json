@@ -1,11 +1,11 @@
 {
     "muscles": [
       {
-        "number": 1,
+        "number": "1",
         "OldVersionKorean": "전경골근",
         "NewVersionKorean": "앞정강근",
         "EnglishAnswer": "tibialis anterior",
-        "image": "tibialis anterior.jpg"
+        "image": "images/tibialis anterior.jpg"
       }
     ]
   }
