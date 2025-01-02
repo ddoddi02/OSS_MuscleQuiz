@@ -3,6 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class QuizPanel extends JFrame {
@@ -26,6 +29,8 @@ public class QuizPanel extends JFrame {
     private JLabel label = new JLabel("근육이름맞추기 1.0");
 
     private boolean isStarted = false;
+    
+    private Font font = new Font("fonts/high1 Wonchuri Body R.ttf", Font.PLAIN, 40);
 
     public QuizPanel() {
         setUndecorated(true);
@@ -37,18 +42,14 @@ public class QuizPanel extends JFrame {
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
 
-        
-
-        // Muscle muscle = musclesMap.get(1);
-
-        label.setBounds(630, 30, 500, 50);
-        label.setFont(new Font("궁서", Font.PLAIN, 40));
+        label.setBounds(635, 30, 500, 50);
+        label.setFont(font);
         add(label);
 
         startButton.setBounds(700, 400, 200, 50);
         startButton.setBackground(new Color(0, 0, 0));
         startButton.setForeground(new Color(255, 255, 255));
-        startButton.setFont(new Font("궁서", Font.PLAIN, 20));
+        startButton.setFont(font.deriveFont(20f));
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -62,7 +63,7 @@ public class QuizPanel extends JFrame {
             public void mousePressed(MouseEvent e) {
                 startButton.setVisible(false);
                 exitButton.setBounds(1350, 30, 200, 50);
-                // setBackground(new Color(0, 0, 0, 0)); 배경 색 지정 / 기본은 검정
+                setBackground(new Color(255, 255, 255, 0)); // 배경 색 지정 / 기본은 검정
                 introBackGround = null;
                 isStarted = true;
             }
@@ -72,7 +73,7 @@ public class QuizPanel extends JFrame {
         exitButton.setBounds(700, 500, 200, 50);
         exitButton.setBackground(new Color(0, 0, 0));
         exitButton.setForeground(new Color(255, 255, 255));
-        exitButton.setFont(new Font("궁서", Font.PLAIN, 20));
+        exitButton.setFont(font.deriveFont(20f));
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -100,9 +101,17 @@ public class QuizPanel extends JFrame {
     public void screenDraw(Graphics g) {
         g.drawImage(introBackGround, 0, 0, null);
         if (isStarted) {
-            g.drawImage(muscleImage, 600, 100, null);
+            quizStarted(g);
         }
         paintComponents(g);
         this.repaint();
+    }
+
+    public void quizStarted(Graphics g) {
+        List<Integer> usedNum = new ArrayList<>();
+        int number = RandomInteger.getRandomInteger();
+        muscleImage = new ImageIcon(musclesMap.get(number).getImage()).getImage();
+        usedNum = number;
+        g.drawImage(muscleImage, 0, 50, null);
     }
 }
