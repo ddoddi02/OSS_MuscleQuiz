@@ -5,7 +5,225 @@
         "OldVersionKorean": "전경골근",
         "NewVersionKorean": "앞정강근",
         "EnglishAnswer": "tibialis anterior",
-        "image": "images/tibialis anterior2.jpg"
+        "image": "images/tibialis_anterior.png"
+      },
+      {
+        "number": "2",
+        "OldVersionKorean": "비골근",
+        "NewVersionKorean": "종아리뼈근",
+        "EnglishAnswer": "fibularis muscle",
+        "image": "images/fibularis_muscle.png"
+      },
+      {
+        "number": "3",
+        "OldVersionKorean": "장딴지근",
+        "NewVersionKorean": "장딴지근",
+        "EnglishAnswer": "gastrocnemius",
+        "image": "images/gastrocnemius.png"
+      },
+      {
+        "number": "4",
+        "OldVersionKorean": "가자미근",
+        "NewVersionKorean": "넙치근",
+        "EnglishAnswer": "soleus",
+        "image": "images/soleus.png"
+      },
+      {
+        "number": "5",
+        "OldVersionKorean": "대퇴사두근",
+        "NewVersionKorean": "넓적다리네갈래근",
+        "EnglishAnswer": "quadriceps femoris",
+        "image": "images/quadriceps_femoris.png"
+      },
+      {
+        "number": "6",
+        "OldVersionKorean": "반막양근",
+        "NewVersionKorean": "반막근",
+        "EnglishAnswer": "semimembranosus",
+        "image": "images/semimembranosus.png"
+      },
+      {
+        "number": "7",
+        "OldVersionKorean": "반건양근",
+        "NewVersionKorean": "반힘줄근",
+        "EnglishAnswer": "semitendinosus",
+        "image": "images/semitendinosus.png"
+      },
+      {
+        "number": "8",
+        "OldVersionKorean": "대둔근",
+        "NewVersionKorean": "큰볼기근",
+        "EnglishAnswer": "gluteus maximus",
+        "image": "images/gluteus_maximus.png"
+      },
+      {
+        "number": "9",
+        "OldVersionKorean": "중둔근",
+        "NewVersionKorean": "중간볼기근",
+        "EnglishAnswer": "gluteus medius",
+        "image": "images/gluteus_medius.png"
+      },
+      {
+        "number": "10",
+        "OldVersionKorean": "소둔근",
+        "NewVersionKorean": "작은볼기근",
+        "EnglishAnswer": "gluteus minimus",
+        "image": "images/gluteus_minimus.png"
+      },
+      {
+        "number": "11",
+        "OldVersionKorean": "장요근",
+        "NewVersionKorean": "허리엉덩근",
+        "EnglishAnswer": "iliopsoas",
+        "image": "images/iliopsoas.png"
+      },
+      {
+        "number": "12",
+        "OldVersionKorean": "외복사근",
+        "NewVersionKorean": "바깥배근",
+        "EnglishAnswer": "external oblique",
+        "image": "images/external_oblique.png"
+      },
+      {
+        "number": "13",
+        "OldVersionKorean": "내복사근",
+        "NewVersionKorean": "안쪽배근",
+        "EnglishAnswer": "internal oblique",
+        "image": "images/internal_oblique.png"
+      },
+      {
+        "number": "14",
+        "OldVersionKorean": "복직근",
+        "NewVersionKorean": "곧은배근",
+        "EnglishAnswer": "rectus abdominis",
+        "image": "images/rectus_abdominis.png"
+      },
+      {
+        "number": "15",
+        "OldVersionKorean": "흉쇄유돌근",
+        "NewVersionKorean": "목빗근",
+        "EnglishAnswer": "sternocleidomastoid",
+        "image": "images/sternocleidomastoid.png"
+      },
+      {
+        "number": "16",
+        "OldVersionKorean": "승모근",
+        "NewVersionKorean": "등세모근",
+        "EnglishAnswer": "trapezius",
+        "image": "images/trapezius.png"
+      },
+      {
+        "number": "17",
+        "OldVersionKorean": "광배근",
+        "NewVersionKorean": "넓은등근",
+        "EnglishAnswer": "latissimus dorsi",
+        "image": "images/latissimus_dorsi.png"
+      },
+      {
+        "number": "18",
+        "OldVersionKorean": "견갑거근",
+        "NewVersionKorean": "어깨올림근",
+        "EnglishAnswer": "levator scapulae",
+        "image": "images/levator_scapulae.png"
+      },
+      {
+        "number": "19",
+        "OldVersionKorean": "극상근",
+        "NewVersionKorean": "위가시근",
+        "EnglishAnswer": "supraspinatus",
+        "image": "images/supraspinatus.png"
+      },
+      {
+        "number": "20",
+        "OldVersionKorean": "극하근",
+        "NewVersionKorean": "아래가시근",
+        "EnglishAnswer": "infraspinatus",
+        "image": "images/infraspinatus.png"
+      },
+      {
+        "number": "21",
+        "OldVersionKorean": "소원근",
+        "NewVersionKorean": "작은원근",
+        "EnglishAnswer": "teres minor",
+        "image": "images/teres_minor.png"
+      },
+      {
+        "number": "22",
+        "OldVersionKorean": "대원근",
+        "NewVersionKorean": "큰원근",
+        "EnglishAnswer": "teres major",
+        "image": "images/teres_major.png"
+      },
+      {
+        "number": "23",
+        "OldVersionKorean": "삼각근",
+        "NewVersionKorean": "어깨세모근",
+        "EnglishAnswer": "deltoid",
+        "image": "images/deltoid.png"
+      },
+      {
+        "number": "24",
+        "OldVersionKorean": "이두근",
+        "NewVersionKorean": "두갈래근",
+        "EnglishAnswer": "biceps brachii",
+        "image": "images/biceps_brachii.png"
+      },
+      {
+        "number": "25",
+        "OldVersionKorean": "삼두근",
+        "NewVersionKorean": "세갈래근",
+        "EnglishAnswer": "triceps brachii",
+        "image": "images/triceps_brachii.png"
+      },
+      {
+        "number": "26",
+        "OldVersionKorean": "상완근",
+        "NewVersionKorean": "위팔근",
+        "EnglishAnswer": "brachialis",
+        "image": "images/brachialis.png"
+      },
+      {
+        "number": "27",
+        "OldVersionKorean": "상완요골근",
+        "NewVersionKorean": "위팔노근",
+        "EnglishAnswer": "brachioradialis",
+        "image": "images/brachioradialis.png"
+      },
+      {
+        "number": "28",
+        "OldVersionKorean": "원회내근",
+        "NewVersionKorean": "원엎침근",
+        "EnglishAnswer": "pronator teres",
+        "image": "images/pronator_teres.png"
+      },
+      {
+        "number": "29",
+        "OldVersionKorean": "요측수근굴근",
+        "NewVersionKorean": "노쪽손목굽힘근",
+        "EnglishAnswer": "flexor carpi radialis",
+        "image": "images/flexor_carpi_radialis.png"
+      },
+      {
+        "number": "30",
+        "OldVersionKorean": "척측수근굴근",
+        "NewVersionKorean": "자쪽손목굽힘근",
+        "EnglishAnswer": "flexor carpi ulnaris",
+        "image": "images/flexor_carpi_ulnaris.png"
+      },
+      {
+        "number": "31",
+        "OldVersionKorean": "수지굴근",
+        "NewVersionKorean": "손가락굽힘근",
+        "EnglishAnswer": "flexor digitorum",
+        "image": "images/flexor_digitorum.png"
+      },
+      {
+        "number": "32",
+        "OldVersionKorean": "수지신근",
+        "NewVersionKorean": "손가락폄근",
+        "EnglishAnswer": "extensor digitorum",
+        "image": "images/extensor_digitorum.png"
       }
     ]
   }
+  
