@@ -14,8 +14,9 @@ public class QuizPanel extends JFrame {
     // private static final int IMAGE_WIDTH = 600;
     // private static final int IMAGE_HEIGHT = 600;
 
-    private int keyNumber = RandomInteger.getRandomInteger();
+    private int keyNumber;
     private ArrayList<Integer> usedNum = new ArrayList<>();
+    private int answerCount = 0;
 
     private Map<Integer, Muscle> musclesMap = MusclesImporter.loadMusclesFromJSON("muscles.json");;
 
@@ -29,6 +30,7 @@ public class QuizPanel extends JFrame {
     private JButton exitButton = new JButton("프로그램 종료");
     private JButton answerButton = new JButton("답 입력");
     private JButton nextButton = new JButton("다음 문제");
+    private JButton restartButton = new JButton("재시작");
 
     private JLabel label = new JLabel("근육이름맞추기 1.0");
     private JLabel answerLabel = new JLabel();
@@ -38,6 +40,7 @@ public class QuizPanel extends JFrame {
     private boolean isStarted = false;
     private boolean isAnswerHanded = false;
     private boolean isNext = false;
+    private boolean isEnd = false;
     
     private Font font = new Font("fonts/high1 Wonchuri Body R.ttf", Font.PLAIN, 40);
 
@@ -135,9 +138,9 @@ public class QuizPanel extends JFrame {
             public void mousePressed(MouseEvent e) {
                 isAnswerHanded = true;
                 isNext = false;
-                if(usedNum.contains(keyNumber)) {
+                if(!usedNum.contains(keyNumber) && (usedNum.size() < 32)) {
                     usedNum.add(keyNumber);
-                }
+                } // 사용한 숫자 기록: 리스트에 없는 숫자여야 하고 리스트의 요소가 32개까지만 들어가도록
             }
         });
         add(answerButton);
@@ -160,12 +163,38 @@ public class QuizPanel extends JFrame {
             }
             @Override
             public void mousePressed(MouseEvent e) {
+                keyNumber = RandomInteger.getRandomInteger();
                 txtfld.setText(null);
                 isNext = true;
             }
         });
         add(nextButton);
         nextButton.setVisible(false);
+
+        restartButton.setBounds(700, 400, 200, 50);
+        restartButton.setBackground(new Color(0, 0, 0));
+        restartButton.setForeground(new Color(255, 255, 255));
+        restartButton.setFont(font.deriveFont(20f));
+        restartButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                startButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                restartButton.setVisible(false);
+                exitButton.setBounds(1350, 30, 200, 50);
+                usedNum.clear();
+                isStarted = true;
+                label.setVisible(false);
+            }
+        });
+        add(startButton);
+        restartButton.setVisible(false);
     }
 
 
@@ -190,6 +219,12 @@ public class QuizPanel extends JFrame {
             nextQuiz(g);
             nextButton.setVisible(false);
         }
+        if (isEnd) {
+            endQuiz(g);
+            answerButton.setVisible(false);
+            txtfld.setVisible(false);
+            answerLabel.setVisible(false);
+        }
         paintComponents(g);
         this.repaint();
     }
@@ -197,6 +232,7 @@ public class QuizPanel extends JFrame {
 
     // 시작 버튼 누르면 뜨는 화면
     public void quizStarted(Graphics g) {
+        keyNumber = RandomInteger.getRandomInteger();
         muscleImage = new ImageIcon(musclesMap.get(keyNumber).getImage()).getImage();
         // keyNumber(난수)를 key로 해서 맵에서 근육 사진 추출
         txtfld.setVisible(true);
@@ -216,17 +252,29 @@ public class QuizPanel extends JFrame {
         String english = realAnswer.getEnglishAnswer();
         if (answer.equals(korean1) || answer.equals(korean2) || answer.equals(english)) {
             answerLabel.setText("<html>정답입니다<br>사용자가 입력한 답&nbsp:&nbsp;" + answer + "<br>정답&nbsp:&nbsp" + korean1 + "&nbsp/&nbsp" + korean2 + "&nbsp/&nbsp;" + english + "</html>");
+            answerCount++;
             answerLabel.setVisible(true);
         } else {
             answerLabel.setText("<html>오답입니다<br>사용자가 입력한 답&nbsp:&nbsp;" + answer + "<br>정답&nbsp:&nbsp" + korean1 + "&nbsp/&nbsp" + korean2 + "&nbsp/&nbsp;" + english + "</html>");
             answerLabel.setVisible(true);
         }
-        nextButton.setVisible(true);
+
+        if (usedNum.size() == 32) {
+            isEnd = true;
+        } else {
+            nextButton.setVisible(true);
+        }
     }
 
     public void nextQuiz(Graphics g) {
         muscleImage = new ImageIcon(musclesMap.get(keyNumber).getImage()).getImage();
         g.drawImage(muscleImage, 0, 50, null);
         answerLabel.setText(null);
+    }
+
+    public void endQuiz(Graphics g) {
+        label.setText("맞춘 정답 수 : " + answerCount + " / " + usedNum.size() + " RETRY?");
+        label.setVisible(true);
+        answerLabel.setVisible(false);
     }
 }
