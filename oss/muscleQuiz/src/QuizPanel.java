@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
+// 주의!!!!!!!!!! 기본 생성자 외에는 JFrame 에서 끈임없이 메소드 반복 실행!!!!!!!!!!
 public class QuizPanel extends JFrame {
 
     private static final int PANEL_WIDTH = 1600;
@@ -30,6 +31,7 @@ public class QuizPanel extends JFrame {
     private JButton exitButton = new JButton("프로그램 종료");
     private JButton answerButton = new JButton("답 입력");
     private JButton nextButton = new JButton("다음 문제");
+    private JButton resultButton = new JButton("결과 확인");
     private JButton restartButton = new JButton("재시작");
 
     private JLabel label = new JLabel("근육이름맞추기 1.0");
@@ -39,8 +41,6 @@ public class QuizPanel extends JFrame {
 
     private boolean isStarted = false;
     private boolean isAnswerHanded = false;
-    private boolean isNext = false;
-    private boolean isEnd = false;
     
     private Font font = new Font("fonts/high1 Wonchuri Body R.ttf", Font.PLAIN, 40);
 
@@ -54,7 +54,7 @@ public class QuizPanel extends JFrame {
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
 
-        label.setBounds(635, 30, 500, 50);
+        label.setBounds(635, 30, 900, 50);
         label.setFont(font);
         add(label); // 제목 : 근육이름 맞추기
 
@@ -81,12 +81,14 @@ public class QuizPanel extends JFrame {
             }
             @Override
             public void mousePressed(MouseEvent e) {
-                startButton.setVisible(false);
+                startButton.setVisible(false); // 시작버튼 가리기
+                txtfld.setVisible(true);
+                answerButton.setVisible(true); // 텍스트필드랑 정답제출버튼 표시
                 exitButton.setBounds(1350, 30, 200, 50);
                 setBackground(new Color(255, 255, 255, 0)); // 배경 색 지정 / 기본은 검정
                 introBackGround = null;
                 isStarted = true;
-                label.setVisible(false);
+                keyNumber = RandomInteger.getRandomInteger();
             }
         });
         add(startButton);
@@ -137,10 +139,18 @@ public class QuizPanel extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 isAnswerHanded = true;
-                isNext = false;
                 if(!usedNum.contains(keyNumber) && (usedNum.size() < 32)) {
                     usedNum.add(keyNumber);
                 } // 사용한 숫자 기록: 리스트에 없는 숫자여야 하고 리스트의 요소가 32개까지만 들어가도록
+
+                if (usedNum.size() == 32) {
+                    resultButton.setVisible(true);
+                    answerButton.setVisible(false);
+                    txtfld.setVisible(false);
+                    answerLabel.setVisible(false); // 32번 완료하면 결과확인 버튼 보이기, 정답/텍스트필드/정답표시줄 가리기
+                } else {
+                    nextButton.setVisible(true);
+                }
             }
         });
         add(answerButton);
@@ -163,13 +173,48 @@ public class QuizPanel extends JFrame {
             }
             @Override
             public void mousePressed(MouseEvent e) {
-                keyNumber = RandomInteger.getRandomInteger();
+                do {
+                    keyNumber = RandomInteger.getRandomInteger();
+                } while(usedNum.contains(keyNumber)); // usedNum에 포함되는 숫자인경우 계속 난수 뽑기
+                answerLabel.setText(null);
+                label.setText("정답 제출 수 : " + Integer.toString(usedNum.size())); // 다음 문제로 넘어갈 때 마다 현재 사용한 숫자의 개수(푼 문제의 수) 출력
                 txtfld.setText(null);
-                isNext = true;
+                nextButton.setVisible(false);
+                isAnswerHanded = false; // 다음 문제를 누르면 isAnswer 메소드 진입 정지
             }
         });
         add(nextButton);
         nextButton.setVisible(false);
+
+        resultButton.setBounds(800, 450, 200, 50);
+        resultButton.setBackground(new Color(0, 0, 0));
+        resultButton.setForeground(new Color(255, 255, 255));
+        resultButton.setFont(font.deriveFont(20f));
+        resultButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                resultButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                resultButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                answerLabel.setText(null);
+                label.setText("맞춘 정답 수 : " + answerCount + " / " + usedNum.size() + " RETRY?");
+                introBackGround = new ImageIcon("images/startscreen2.jpg").getImage();
+                setBackground(new Color(0, 0, 0, 0));
+                muscleImage = null;
+                isAnswerHanded = false; // 결과확인 버튼 눌리면 정답 확인 안함
+                isStarted = false; // 퀴즈화면도 지우기
+                restartButton.setVisible(true);
+                resultButton.setVisible(false);
+                exitButton.setBounds(700, 500, 200, 50);
+            }
+        });
+        add(resultButton);
+        resultButton.setVisible(false);
 
         restartButton.setBounds(700, 400, 200, 50);
         restartButton.setBackground(new Color(0, 0, 0));
@@ -178,11 +223,11 @@ public class QuizPanel extends JFrame {
         restartButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                restartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                startButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                restartButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
             @Override
             public void mousePressed(MouseEvent e) {
@@ -191,9 +236,10 @@ public class QuizPanel extends JFrame {
                 usedNum.clear();
                 isStarted = true;
                 label.setVisible(false);
+                introBackGround = new ImageIcon("images/startscreen1.jpg").getImage();
             }
         });
-        add(startButton);
+        add(restartButton);
         restartButton.setVisible(false);
     }
 
@@ -215,16 +261,6 @@ public class QuizPanel extends JFrame {
         if (isAnswerHanded) {
             isAnswer(txtfld.getText());
         }
-        if (isNext) {
-            nextQuiz(g);
-            nextButton.setVisible(false);
-        }
-        if (isEnd) {
-            endQuiz(g);
-            answerButton.setVisible(false);
-            txtfld.setVisible(false);
-            answerLabel.setVisible(false);
-        }
         paintComponents(g);
         this.repaint();
     }
@@ -232,12 +268,8 @@ public class QuizPanel extends JFrame {
 
     // 시작 버튼 누르면 뜨는 화면
     public void quizStarted(Graphics g) {
-        keyNumber = RandomInteger.getRandomInteger();
         muscleImage = new ImageIcon(musclesMap.get(keyNumber).getImage()).getImage();
         // keyNumber(난수)를 key로 해서 맵에서 근육 사진 추출
-        txtfld.setVisible(true);
-        answerButton.setVisible(true);
-        // 텍스트필드랑 정답제출버튼 표시
         g.drawImage(muscleImage, 0, 50, null);
         // 근육 사진 화면에 표시
     }
@@ -258,23 +290,5 @@ public class QuizPanel extends JFrame {
             answerLabel.setText("<html>오답입니다<br>사용자가 입력한 답&nbsp:&nbsp;" + answer + "<br>정답&nbsp:&nbsp" + korean1 + "&nbsp/&nbsp" + korean2 + "&nbsp/&nbsp;" + english + "</html>");
             answerLabel.setVisible(true);
         }
-
-        if (usedNum.size() == 32) {
-            isEnd = true;
-        } else {
-            nextButton.setVisible(true);
-        }
-    }
-
-    public void nextQuiz(Graphics g) {
-        muscleImage = new ImageIcon(musclesMap.get(keyNumber).getImage()).getImage();
-        g.drawImage(muscleImage, 0, 50, null);
-        answerLabel.setText(null);
-    }
-
-    public void endQuiz(Graphics g) {
-        label.setText("맞춘 정답 수 : " + answerCount + " / " + usedNum.size() + " RETRY?");
-        label.setVisible(true);
-        answerLabel.setVisible(false);
     }
 }
