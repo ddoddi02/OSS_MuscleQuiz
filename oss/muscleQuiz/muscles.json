@@ -6,6 +6,13 @@
         "NewVersionKorean": "앞정강근",
         "EnglishAnswer": "tibialis anterior",
         "image": "images/tibialis anterior2.jpg"
+      },
+      {
+        "number": "2",
+        "OldVersionKorean": "상완이두근",
+        "NewVersionKorean": "위팔두갈래근",
+        "EnglishAnswer": "biceps brachii",
+        "image": "images/biceps brachii.jpg"
       }
     ]
   }

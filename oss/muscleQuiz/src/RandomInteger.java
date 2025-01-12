@@ -1,9 +1,9 @@
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class RandomInteger {
     public static int getRandomInteger() {
-        Random random = new Random();
-
-        return (random.nextInt(64) + 1);
+        SecureRandom random = new SecureRandom();
+        
+        return (random.nextInt(2) + 1);
     }
 }
