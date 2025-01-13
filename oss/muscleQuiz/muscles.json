@@ -72,7 +72,7 @@
     },
     {
       "number": "11",
-      "OldVersionKorean": "장딴지근",
+      "OldVersionKorean": "비복근",
       "NewVersionKorean": "장딴지근",
       "EnglishAnswer": "gastrocnemius",
       "image": "images/gastrocnemius.png"
@@ -215,7 +215,7 @@
       "OldVersionKorean": "승모근",
       "NewVersionKorean": "등세모근",
       "EnglishAnswer": "trapezius",
-      "image": "images/trapezius.png"
+      "image": "images/trapezius_muscle.png"
     },
     {
       "number": "32",
