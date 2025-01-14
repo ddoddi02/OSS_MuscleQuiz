@@ -3,6 +3,7 @@ public class Muscle {
     private String NewVersionKorean;
     private String EnglishAnswer;
     private String image;
+    // 근육 이름 세 가지와 이미지 경로
 
     public Muscle(String OldVersionKorean, String NewVersionKorean, String EnglishAnswer, String image) {
         this.OldVersionKorean = OldVersionKorean;

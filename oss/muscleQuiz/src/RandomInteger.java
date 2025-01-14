@@ -1,9 +1,9 @@
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class RandomInteger {
     public static int getRandomInteger() {
-        Random random = new Random();
-
-        return (random.nextInt(64) + 1);
+        SecureRandom random = new SecureRandom(); // 난수 생성기
+        
+        return (random.nextInt(32) + 1);
     }
 }
