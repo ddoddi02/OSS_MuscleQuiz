@@ -66,15 +66,14 @@ public class QuizPanel extends JFrame {
         label.setHorizontalAlignment(SwingConstants.CENTER); // 글씨 가운데 정렬
         add(label); // 제목 : 근육이름 맞추기
 
-        answerLabel.setBounds(500, 200, 900, 200);
+        answerLabel.setBounds(700, 200, 900, 200);
         answerLabel.setFont(font.deriveFont(30f));
-        answerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(answerLabel);
         answerLabel.setVisible(false);
         // 정답/오답 표시
 
         // 정답 입력하는 텍스트필드. 시작버튼 누르면 보임.
-        txtfld.setBounds(775, 400, 250, 50);
+        txtfld.setBounds(875, 400, 250, 50);
         txtfld.setFont(font.deriveFont(30f));
         add(txtfld);
         txtfld.setVisible(false);
@@ -114,6 +113,7 @@ public class QuizPanel extends JFrame {
                 usedNum.clear();
                 answerCount = 0;
                 label.setText(null);
+                txtfld.setText(null);
                 // 사용한 번호, 정답 수, 표시줄 초기화
             }
         });
@@ -142,7 +142,7 @@ public class QuizPanel extends JFrame {
         add(exitButton);
 
         // 정답 제출 버튼. 시작 버튼 누르면 보임.
-        answerButton.setBounds(800, 450, 200, 50);
+        answerButton.setBounds(900, 450, 200, 50);
         answerButton.setBackground(Color.BLACK);
         answerButton.setForeground(Color.WHITE);
         answerButton.setFont(font.deriveFont(20f));
@@ -170,6 +170,7 @@ public class QuizPanel extends JFrame {
                     resultButton.setVisible(true);
                     txtfld.setVisible(false); // 퀴즈 개수만큼 완료하면 결과확인 버튼 보이기 / 정답버튼, 텍스트필드 가리기
                 } else {
+                    txtfld.setText(null);
                     nextButton.setVisible(true); // 아직 퀴즈 개수만큼 안했으면 다음 문제 버튼 표시
                 }
             }
@@ -179,7 +180,7 @@ public class QuizPanel extends JFrame {
 
 
         // 다음 문제로 넘어가는 버튼. 정답 입력하면 보임.
-        nextButton.setBounds(800, 500, 200, 50);
+        nextButton.setBounds(900, 500, 200, 50);
         nextButton.setBackground(Color.BLACK);
         nextButton.setForeground(Color.WHITE);
         nextButton.setFont(font.deriveFont(20f));
@@ -198,8 +199,7 @@ public class QuizPanel extends JFrame {
                     keyNumber = RandomInteger.getRandomInteger();
                 } while(usedNum.contains(keyNumber)); // usedNum에 포함되는 숫자인경우 계속 난수 뽑기. 중복 피하기
                 answerLabel.setText(null);
-                txtfld.setText(null);
-                // 정답 표시줄, 텍스트필드 비우기
+                // 정답 표시줄 비우기
                 answerButton.setVisible(true);
                 nextButton.setVisible(false);
                 // 정답 버튼 표시/다음 버튼 가리기
