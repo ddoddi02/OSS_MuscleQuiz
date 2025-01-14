@@ -66,8 +66,12 @@ public class QuizPanel extends JFrame {
         label.setHorizontalAlignment(SwingConstants.CENTER); // 글씨 가운데 정렬
         add(label); // 제목 : 근육이름 맞추기
 
-        answerLabel.setBounds(700, 200, 900, 200);
+        answerLabel.setBounds(600, 200, 900, 200);
         answerLabel.setFont(font.deriveFont(30f));
+        answerLabel.setOpaque(true);
+        answerLabel.setBackground(Color.WHITE);
+        answerLabel.setForeground(Color.BLACK);
+        answerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(answerLabel);
         answerLabel.setVisible(false);
         // 정답/오답 표시
@@ -113,6 +117,7 @@ public class QuizPanel extends JFrame {
                 usedNum.clear();
                 answerCount = 0;
                 label.setText(null);
+                answerLabel.setVisible(false);
                 txtfld.setText(null);
                 // 사용한 번호, 정답 수, 표시줄 초기화
             }
@@ -198,18 +203,17 @@ public class QuizPanel extends JFrame {
                 do {
                     keyNumber = RandomInteger.getRandomInteger();
                 } while(usedNum.contains(keyNumber)); // usedNum에 포함되는 숫자인경우 계속 난수 뽑기. 중복 피하기
-                answerLabel.setText(null);
-                // 정답 표시줄 비우기
                 answerButton.setVisible(true);
+                answerLabel.setVisible(false);
                 nextButton.setVisible(false);
-                // 정답 버튼 표시/다음 버튼 가리기
+                // 정답 버튼 표시/다음 버튼 가리기, 정답 표시줄 가리기
             }
         });
         add(nextButton);
         nextButton.setVisible(false);
 
         // 결과 확인 버튼. 퀴즈 개수만큼 답을 제출하면 보임
-        resultButton.setBounds(800, 450, 200, 50);
+        resultButton.setBounds(900, 450, 200, 50);
         resultButton.setBackground(Color.BLACK);
         resultButton.setForeground(Color.WHITE);
         resultButton.setFont(font.deriveFont(20f));
@@ -225,7 +229,7 @@ public class QuizPanel extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 answerLabel.setVisible(false);
-                answerLabel.setText(null); // 정답 표시줄 내용 삭제, 가리기
+                // 정답 표시줄 가리기
                 label.setText("맞춘 정답 수 : " + answerCount + " / " + usedNum.size() + " RETRY?"); // 기본 레이블 내용 정답 수 표시
                 introBackGround = new ImageIcon("images/startscreen2.jpg").getImage(); // 배경 사진 변경
                 setBackground(new Color(0, 0, 0, 0)); // 배경을 초기화면 상태로 돌림
